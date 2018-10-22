@@ -43,3 +43,9 @@ def success(request):
     user = User.objects.get(id=request.session['id'])
     response = 'Main dashboard ' + user.name
     return HttpResponse(response)
+
+def editpage(request, id):
+    data = {
+        'user': User.objects.filter(id = id)
+    }
+    return render(request, "log_reg/user.html", data)
