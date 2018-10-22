@@ -5,7 +5,7 @@ from django.shortcuts import render, HttpResponse, redirect
 
 def index(request):
 	response = "Welcome to the dashboard";
-	return HttpResponse(response);
+	return render(request, "Textbooks/mainpage.html");
 
 
 def showbook(request, id):
@@ -15,4 +15,9 @@ def showbook(request, id):
 
 def addAbook(request):
 	response = "Add new book";
+	return HttpResponse(response);
+
+
+def editBookInfo(request, id):
+	response = "Edit book page";
 	return HttpResponse(response);

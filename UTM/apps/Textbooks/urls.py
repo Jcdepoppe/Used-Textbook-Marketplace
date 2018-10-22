@@ -4,5 +4,6 @@ urlpatterns = [
 	url(r'^$', views.index),
 	url(r'^(?P<id>\d+)/show$', views.showbook),
 	url(r'^add$', views.addAbook),
+	url(r'^(?P<id>\d+)/edit$', views.editBookInfo),
 
 ]
