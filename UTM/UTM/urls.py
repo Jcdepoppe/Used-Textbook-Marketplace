@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 
+from django.conf import settings
+from django.views.static import serve
+
 urlpatterns = [
     url(r'^', include('apps.log_reg.urls')),
     url(r'^books/', include('apps.Textbooks.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'documant_root': settings.MEDIA_ROOT,
+        }),
+    ]

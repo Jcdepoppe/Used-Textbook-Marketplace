@@ -49,3 +49,4 @@ def editpage(request, id):
         'user': User.objects.filter(id = id)
     }
     return render(request, "log_reg/user.html", data)
+
