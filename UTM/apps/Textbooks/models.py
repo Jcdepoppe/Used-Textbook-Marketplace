@@ -46,3 +46,5 @@ class Message(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     on_message = models.ForeignKey(Message, related_name='comments')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
