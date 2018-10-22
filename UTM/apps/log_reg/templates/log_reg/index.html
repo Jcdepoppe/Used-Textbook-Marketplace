@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Main page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'log_reg/css/bootstrap.min.css' %}">
+    <script type=text/javascript src="{% static 'log_reg/js/bootstrap.min.js' %}"></script>
+    <style>
+        .messages{
+            color: red;
+        }
+        .reg, .login{
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px;
+            width: 30%;
+            padding: 20px;
+        }
+        .container{
+            text-align: center;
+        }
+        .form-control{
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Welcome to the Used Books Marketplace!</h1>
+        <div class='errors'>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+        <div class='reg'>
+            <h3>Register here!</h3>
+            <form action='/register' method='post'>
+                {% csrf_token %}
+                <input type='text' name='name' class="form-control"  placeholder="Name">
+                <input type='text' name='alias' class="form-control" placeholder="Alias">
+                <input type='text' name='email' class="form-control" placeholder="Email Address">
+                <input type='text' name='college' class="form-control" placeholder="College">
+                <input type='password' name='password' class="form-control" placeholder="Password"> 
+                <input type='password' name='passConfirm' class="form-control" placeholder="Confirm password">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            </form>
+        </div>
+        <div class='login'>
+            <h3>Login here</h3>
+            <form action='/login' method='post'>
+                {% csrf_token %}
+                <input type='text' name='emaillogin' class="form-control" placeholder="Email">
+                <input type='password' name='passwordlogin' class="form-control" placeholder="Password">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
