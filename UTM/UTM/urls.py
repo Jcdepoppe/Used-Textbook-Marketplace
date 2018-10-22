@@ -16,7 +16,18 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.conf import settings
+from django.views.static import serve
+
 urlpatterns = [
     url(r'^books/', include('apps.Textbooks.urls')),
     # url(r'^', include('apps.login_reg.urls'))
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'documant_root': settings.MEDIA_ROOT,
+        }),
+    ]
