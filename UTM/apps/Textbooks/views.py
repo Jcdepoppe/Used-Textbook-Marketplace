@@ -1,11 +1,13 @@
 from django.shortcuts import render, HttpResponse, redirect
-# from apps.login_reg.models import *
-# from .models import *
+from apps.log_reg.models import *
+from .models import *
 
 
 def index(request):
-	response = "Welcome to the dashboard";
-	return HttpResponse(response);
+	context ={
+				"books" : Book.objects.all()
+	}
+	return render(request, "Textbooks/mainpage.html", context);
 
 
 def showbook(request, id):
@@ -13,6 +15,16 @@ def showbook(request, id):
 	return HttpResponse(response);
 
 
-def addAbook(request):
+def addNewbook(request):
 	response = "Add new book";
+	return HttpResponse(response);
+
+
+def editBookInfo(request, id):
+	response = "Edit book page";
+	return HttpResponse(response);
+
+
+def deleteBook(request, id):
+	response = "Delete book";
 	return HttpResponse(response);

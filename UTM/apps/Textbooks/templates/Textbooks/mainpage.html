@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- some cool icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+
+
+
+    <!-- *************************************************************************
+        ******* Make sure to modify the title of the page ************************
+        ************************************************************************** -->
+    <title>NEW TITLE HERE</title>
+    <style>
+        .navbar {
+            background-color: rgb(111, 182, 65)
+        }
+        .container {
+            margin: auto;
+            padding: 20px 0;
+            /*width: 70%;*/
+        }
+        .left-panel { 
+            display:inline-block;
+            width: 49%; 
+            vertical-align:top;
+            padding:20px;
+        }
+        .right-panel {
+            width: 50%;
+            display: inline-block;
+            padding:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="d-flex navbar navbar-dark sticky-top">
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
+        <div class="p-2 nav-item">
+            <a href=""><button class=" btn btn-primary" type="button">Button name</button></a>
+        </div>
+        <div class="p-2 nav-item">
+            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+        </div>
+    </header>
+
+
+<!-- Everything in the page goes inside of this container -->
+    <div class="container">
+        <div class="left-panel">
+            <h3>Books Available For Sale</h3>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td><a href="/books/{{book.id}}/show">view</a> | <a href="/books/{{book.id}}/edit">edit</a> | <a href="/books/{{book.id}}/delete">delete</a></td>
+                </tr>
+               </tbody>
+            </table>
+            <a href="/books/add">Add Book</a>
+        </div>
+        <div class="right-panel">
+            <h3>My Wishlist</h3>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                 <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                </tr>
+              </tbody>
+            </table>
+            <a href=""><span style="float:right;">Add more</span></a>
+        </div>
+
+    </div>
+</body>
+</html>
