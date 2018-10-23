@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- some cool icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+
+
+
+    <!-- *************************************************************************
+        ******* Make sure to modify the title of the page ************************
+        ************************************************************************** -->
+    <title>UTM: Sell a book</title>
+    <style>
+        .navbar {
+            background-color: rgb(111, 182, 65)
+        }
+
+        .container {
+            margin: auto;
+            padding: 20px 0;
+            width: 70%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header class="d-flex navbar navbar-dark sticky-top">
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
+        <div class="p-2 nav-item">
+            <a href="/books"><button class=" btn btn-primary" type="button">Go to Dashboard</button></a>
+        </div>
+        <div class="p-2 nav-item">
+            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+        </div>
+    </header>
+
+
+    <!-- Everything in the page goes inside of this container -->
+    <div class="container">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h1 class="card-title">Enter your textbook information</h1>
+                <form action="/books/sell/process" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+<!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-3 col-form-label">
+                            Title
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="author" class="col-sm-3 col-form-label">
+                            Author
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="author">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="edition" class="col-sm-3 col-form-label">
+                            Edition
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="edition">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="publisher" class="col-sm-3 col-form-label">
+                            Publisher
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="publisher">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ISBN" class="col-sm-3 col-form-label">
+                            ISBN 
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="ISBN">
+                            <small>No dashes or spaces</small>
+                        </div>
+                    </div>
+
+
+<!-- ***************** From here on, it's all user specific data that will remain after the API magic **** -->
+
+                    <div class="form-group row">
+                        <label for="condition" class="col-sm-3 col-form-label">
+                            Condition
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="condition">
+                                <option value="5">New</option>
+                                <option value="4">Used - Like New</option>
+                                <option value="3">Used - Very Good</option>
+                                <option value="2">Used - Good</option>
+                                <option value="1">Used - Acceptable</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ISBN" class="col-sm-3 col-form-label">
+                            Description (mandatory for books in "Acceptable" condition)
+                        </label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex">
+                        <div class="col-sm-3">
+                            Upload an image of your book
+                        </div>
+                        <div class="row col-sm-9 input-group">
+                            <label class="input-group-btn">
+                                <span class="btn btn-primary">
+                                    Browse&hellip; <input type="file" style="display: none;" multiple>
+                                </span>
+                            </label>
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="price" class="col-sm-3 col-form-label">
+                            Price
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="price">
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-outline-secondary btn-block" value="Create">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+{% load static %}
+<script src="{% static 'Textbooks/js/fileinput.js' %}"></script>
+
+</html>

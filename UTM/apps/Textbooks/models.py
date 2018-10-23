@@ -8,19 +8,12 @@ from apps.log_reg.models import User
 
 
 class Book(models.Model):
-<<<<<<< HEAD
     title = models.CharField(max_length = 255)
-    Edition = models.SmallIntegerField()
-    Publisher = models.CharField(max_length = 255)
+    edition = models.SmallIntegerField()
+    publisher = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
-=======
-    title = models.CharField(max_length=255)
-    Edition = models.SmallIntegerField()
-    Publisher = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
->>>>>>> master
-    ISBN = models.BigIntegerField
-    cover = models.ImageField(blank=True, null=True, upload_to='covers/')
+    ISBN = models.BigIntegerField(default=0)
+    cover = models.ImageField(blank=True, null=True, upload_to='covers/', verbose_name="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -29,7 +22,7 @@ class Sells(models.Model):
     book = models.ForeignKey(Book, related_name='for_sale')
     condition = models.SmallIntegerField()
     price = models.IntegerField(null=True)
-    picture = models.ImageField(blank=True, null=True, upload_to='user_pics/')
+    picture = models.ImageField(blank=True, null=True, upload_to='user_pics/', verbose_name="", default="No-pic.png")
     description = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
