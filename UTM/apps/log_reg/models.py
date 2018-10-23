@@ -30,6 +30,16 @@ class UserManager(models.Manager):
             return errors
         errors['email'] = "Email and password do not match"
         return errors
+    
+    def validEdit(self, postData, request):
+        errors = {}
+        if len(postData['name']) < 5:
+            errors["name"] = "Your name must be at least 6 characters"
+        if len(postData['alias']) < 3:
+            errors['alias'] = "Your alias name should be at least 3 characters"
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email'] = "Email must be valid"
+        return errors
 
 
 class User(models.Model):

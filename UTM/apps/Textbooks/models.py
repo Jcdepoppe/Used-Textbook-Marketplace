@@ -8,10 +8,10 @@ from apps.log_reg.models import User
 
 
 class Book(models.Model):
-    title = models.CharField(255)
+    title = models.CharField(max_length = 255)
     Edition = models.SmallIntegerField()
-    Publisher = models.CharField(255)
-    author = models.CharField(255)
+    Publisher = models.CharField(max_length = 255)
+    author = models.CharField(max_length = 255)
     ISBN = models.BigIntegerField
     cover = models.ImageField(blank=True, null=True, upload_to='covers/')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -23,7 +23,7 @@ class Sells(models.Model):
     condition = models.SmallIntegerField()
     price = models.IntegerField(null=True)
     picture = models.ImageField(blank=True, null=True, upload_to='user_pics/')
-    description = models.TextField(Null=True)
+    description = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

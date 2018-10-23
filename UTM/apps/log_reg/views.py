@@ -40,13 +40,26 @@ def login(request):
     return redirect('/')
 
 def success(request):
-    user = User.objects.get(id=request.session['id'])
-    response = 'Main dashboard ' + user.name
-    return HttpResponse(response)
+    return redirect('/books')
 
 def editpage(request, id):
     data = {
         'user': User.objects.filter(id = id)
     }
     return render(request, "log_reg/user.html", data)
+
+def edit(request):
+    if request.method =="POST":
+        errors = User.objects.validEdit(request.POST, request)
+        if len(errors):
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect(reverse('editpage', kwargs={'id': request.session['id'] }))
+        update = User.objects.get(id = request.session['id'])
+        update.name = request.POST['name']
+        update.alias = request.POST['alias']
+        update.email = request.POST['email']
+        update.college = request.POST['college']
+        update.save()
+    return redirect('/books')
 
