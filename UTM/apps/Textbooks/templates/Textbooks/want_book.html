@@ -20,7 +20,7 @@
     <!-- *************************************************************************
         ******* Make sure to modify the title of the page ************************
         ************************************************************************** -->
-    <title>UTM: Sell a book</title>
+    <title>UTM: Find a book</title>
     <style>
         .navbar {
             background-color: rgb(111, 182, 65)
@@ -43,7 +43,7 @@
             <a href="/books"><button class=" btn btn-primary" type="button">Go to Dashboard</button></a>
         </div>
         <div class="p-2 nav-item">
-            <a href="/"><button class="btn btn-primary" type="button">Logout</button></a></li>
+            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
         </div>
     </header>
 
@@ -52,47 +52,47 @@
     <div class="container">
         <div class="card bg-light">
             <div class="card-body">
-                <h1 class="card-title">Enter your textbook information</h1>
-                <form action="/books/sell/process" method="POST" enctype="multipart/form-data">
+                <h1 class="card-title">Enter the information of the textbook you want</h1>
+                <form action="/books/want/process" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 <!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->
                     <div class="form-group row">
-                        <label for="title" class="col-sm-3 col-form-label">
+                        <label for="title" class="col-sm-2 col-form-label">
                             Title
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="title">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="author" class="col-sm-3 col-form-label">
+                        <label for="author" class="col-sm-2 col-form-label">
                             Author
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="author">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="edition" class="col-sm-3 col-form-label">
+                        <label for="edition" class="col-sm-2 col-form-label">
                             Edition
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="edition">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="publisher" class="col-sm-3 col-form-label">
+                        <label for="publisher" class="col-sm-2 col-form-label">
                             Publisher
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="publisher">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="ISBN" class="col-sm-3 col-form-label">
+                        <label for="ISBN" class="col-sm-2 col-form-label">
                             ISBN 
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" name="ISBN">
                             <small>No dashes or spaces</small>
                         </div>
@@ -102,10 +102,10 @@
 <!-- ***************** From here on, it's all user specific data that will remain after the API magic **** -->
 
                     <div class="form-group row">
-                        <label for="condition" class="col-sm-3 col-form-label">
+                        <label for="condition" class="col-sm-2 col-form-label">
                             Condition
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
                             <select class="form-control" name="condition">
                                 <option value="5">New</option>
                                 <option value="4">Used - Like New</option>
@@ -114,41 +114,20 @@
                                 <option value="1">Used - Acceptable</option>
                             </select>
                         </div>
+                        <div class="col-sm-4"> or better</div>
                     </div>
+                    
                     <div class="form-group row">
-                        <label for="description" class="col-sm-3 col-form-label">
-                            Description (mandatory for books in "Acceptable" condition)
-                        </label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="description"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row d-flex">
-                        <div class="col-sm-3">
-                            Upload an image of your book
-                        </div>
-                        <div class="row col-sm-9 input-group">
-                            <div class="input-group">
-                                <label class="input-group-btn">
-                                    <span class="btn btn-primary">
-                                        Browse&hellip; <input type="file" style="display: none;" name="picture">
-                                    </span>
-                                </label>
-                                <input type="text" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="price" class="col-sm-3 col-form-label">
+                        <label for="price" class="col-sm-2 col-form-label">
                             Price $
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
                             <input type="text" class="form-control" name="price">
-                            <small class="form-text text-muted">Leave blank if you're open to any offers</small>
                         </div>
+                        <div class="col-sm-4"> or less</div>
                     </div>
 
-                    <input type="submit" class="btn btn-outline-primary btn-block" value="Post for sale">
+                    <input type="submit" class="btn btn-outline-primary btn-block" value="I want this book">
                 </form>
             </div>
         </div>

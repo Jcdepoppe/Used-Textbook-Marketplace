@@ -87,7 +87,7 @@ def sell_book_process(request):
 			book=Book.objects.create(
 				title=request.POST['title'],
 				author=request.POST['author'],
-				edition=float(request.POST['edition']),
+				edition=int(request.POST['edition']),
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
 			)
@@ -99,7 +99,7 @@ def sell_book_process(request):
 			book=book, 
 			seller=user, 
 			condition=request.POST['condition'],
-			price=float(request.POST['price'])*100,
+			price=int(request.POST['price'])*100,
 			picture= picture,
 			description=request.POST['description'],
 		)
@@ -107,22 +107,37 @@ def sell_book_process(request):
 
 
 def edit_sell(request, id):
-	data ={
-		'book': Sells.objects.get(id = id)
-	}
-	return render(request, 'Textbooks/edit_sell.html', data)
-
-def update_sell(request):
 	if 'id' not in request.session:
 		return redirect('/')
-	if request.method =="POST":
-		update = Sells.objects.get(id = request.POST['book_id'])
-		update.condition = request.POST['condition']
-		update.description = request.POST['description']
-		if 'picture' in request.FILES:
-			update.picture = request.FILES['picture']
-		update.price = float(request.POST['price'])*100
+	response = "Edit book for sale page"
+	return HttpResponse(response)
 
+
+def delete_sell(request, id):
+	if 'id' not in request.session:
+		return redirect('/')
+	response = "Delete book for sale"
+	return HttpResponse(response)
+
+
+def show_want(request, id):
+	if 'id' not in request.session:
+		return redirect('/')
+	response = "Individual wishlist book page"
+	return HttpResponse(response)
+
+
+def want_book(request):
+	if 'id' not in request.session:
+		return redirect('/')
+	
+	return render(request, 'Textbooks/want_book.html')
+
+def want_book_process(request):
+	if 'id' not in request.session:
+		return redirect('/')
+	if request.method == "POST":
+		user=User.objects.get(id=request.session['id'])
 		book_exists = Book.objects.filter(
 			title=request.POST['title'], 
 			author=request.POST['author'],
@@ -140,69 +155,6 @@ def update_sell(request):
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
 			)
-		update.book = book
-		update.save()
-	return redirect('/books')
-
-
-
-def delete_sell(request, id):
-	if 'id' not in request.session:
-		return redirect('/')
-	delete = Sells.objects.get(id = id)
-	delete.delete()
-	return redirect('/books')
-
-
-def show_want(request, id):
-	if 'id' not in request.session:
-		return redirect('/')
-	request.session['sells_id'] = id
-	info = Wants.objects.get(id = id)
-	data ={
-		'info': info,
-		# 'messages': Message.objects.filter(on_book = info),
-		# 'comments': Comment.objects.filter(on_message = Message.objects.filter(on_book = info)),
-	}
-	return render(request, 'Textbooks/view_wantbook.html', data)
-
-
-def want_book(request):
-	if 'id' not in request.session:
-		return redirect('/')
-	
-	return render(request, 'Textbooks/want_book.html')
-
-def want_book_process(request):
-	if 'id' not in request.session:
-		return redirect('/')
-	if request.method == "POST":
-		user = User.objects.get(id=request.session['id'])
-		book_exists = Book.objects.filter(
-			title=request.POST['title'],
-			author=request.POST['author'],
-			edition=int(request.POST['edition']),
-			publisher=request.POST['publisher'],
-			ISBN=request.POST['ISBN'],
-		)
-		if len(book_exists) > 0:
-			book = book_exists[0]
-		else:
-			book = Book.objects.create(
-				title=request.POST['title'],
-				author=request.POST['author'],
-				edition=int(request.POST['edition']),
-				publisher=request.POST['publisher'],
-				ISBN=request.POST['ISBN'],
-			)
-		want = Wants.objects.create(
-			buyer=user,
-			book=book,
-			condition=request.POST['condition'],
-			price=request.POST['price']
-		)
-	return redirect('/books')
-
 
 
 def edit_want(request, id):

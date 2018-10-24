@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Main page</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'log_reg/css/bootstrap.min.css' %}">
-    <script type=text/javascript src="{% static 'log_reg/js/bootstrap.min.js' %}"></script>
+    <title>Used Textbooks Marketplace</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <style>
         .messages{
             color: red;
@@ -18,15 +19,32 @@
             width: 30%;
             padding: 20px;
         }
-        .container{
+        .navbar {
+            background-color: rgb(111, 182, 65)
+        }
+        .container {
             text-align: center;
+            margin: auto;
+            padding: 20px 0;
+            /* width: 70%; */
         }
         .form-control{
-            width: 90%;
+            /* width: 90%; */
         }
     </style>
 </head>
 <body>
+    <header class="d-flex navbar navbar-dark sticky-top">
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
+        <!-- <div class="p-2 nav-item">
+            <a href=""><button class=" btn btn-primary" type="button">Button name</button></a>
+        </div>
+        <div class="p-2 nav-item">
+            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+        </div> -->
+    </header>
+
     <div class='container'>
         <h1>Welcome to the Used Books Marketplace!</h1>
         <div class='errors'>
@@ -48,16 +66,17 @@
                 <input type='text' name='college' class="form-control" placeholder="College">
                 <input type='password' name='password' class="form-control" placeholder="Password"> 
                 <input type='password' name='passConfirm' class="form-control" placeholder="Confirm password">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <button class="btn  btn-primary btn-block" type="submit">Register</button>
             </form>
         </div>
         <div class='login'>
-            <h3>Login here</h3>
+            <h3>Already a user?</h3>
+            <h3>Login here!</h3>
             <form action='/login' method='post'>
                 {% csrf_token %}
                 <input type='text' name='emaillogin' class="form-control" placeholder="Email">
                 <input type='password' name='passwordlogin' class="form-control" placeholder="Password">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                <button class="btn  btn-primary btn-block" type="submit">Log in</button>
             </form>
         </div>
     </div>

@@ -17,7 +17,7 @@
     <!-- *************************************************************************
         ******* Make sure to modify the title of the page ************************
         ************************************************************************** -->
-    <title>NEW TITLE HERE</title>
+    <title>UTM Dashboard</title>
     <style>
         .navbar {
             background-color: rgb(111, 182, 65)
@@ -46,7 +46,7 @@
         <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
         <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
         <div class="p-2 nav-item">
-            <a href=""><button class=" btn btn-primary" type="button">Button name</button></a>
+            <a href="/edit/{{request.session.id}}"><button class=" btn btn-primary" type="button">Edit Profile</button></a>
         </div>
         <div class="p-2 nav-item">
             <a href="/"><button class="btn btn-primary" type="button">Logout</button></a></li>
@@ -76,12 +76,13 @@
                         </tr>
                         {% endfor %}
 
-
+                         <!-- We don't need these anymore 
                         <tr>
                             <td>Hardcoded title</td>
                             <td>Hardcoded author</td>
                             <td><a href="/books/sell/42/show">view</a> | <a href="/books/sell/42/edit">edit</a> | <a href="/books/sell/42/delete">delete</a></td>
                         </tr>
+                        -->
                     </tbody>
                 </table>
                 <a href="/books/sell">Add Book</a>
@@ -104,10 +105,12 @@
                             <td><a href="/books/want/{{item.id}}/show">view</a> | <a href="/books/want/{{item.id}}/edit">edit</a> | <a href="/books/want/{{item.id}}/delete">delete</a></td>
                         </tr>
                         {% endfor %}
+                        <!-- We don't need these anymore 
                         <tr>
                             <td>Hardcoded title</td>
                             <td>Hardcoded author</td>
                         </tr>
+                        -->
                     </tbody>
                 </table>
                 <a href="/books/want"><span style="float:right;">Add more</span></a>
