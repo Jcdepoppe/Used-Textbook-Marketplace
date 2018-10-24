@@ -8,17 +8,10 @@ from apps.log_reg.models import User
 
 
 class Book(models.Model):
-<<<<<<< HEAD
     title = models.CharField(max_length = 255)
     Edition = models.SmallIntegerField()
     Publisher = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
-=======
-    title = models.CharField(max_length=255)
-    Edition = models.SmallIntegerField()
-    Publisher = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
->>>>>>> master
     ISBN = models.BigIntegerField
     cover = models.ImageField(blank=True, null=True, upload_to='covers/')
     created_at = models.DateTimeField(auto_now_add=True)
