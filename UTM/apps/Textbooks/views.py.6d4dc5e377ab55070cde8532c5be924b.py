@@ -137,32 +137,24 @@ def want_book_process(request):
 	if 'id' not in request.session:
 		return redirect('/')
 	if request.method == "POST":
-		user = User.objects.get(id=request.session['id'])
+		user=User.objects.get(id=request.session['id'])
 		book_exists = Book.objects.filter(
-			title=request.POST['title'],
+			title=request.POST['title'], 
 			author=request.POST['author'],
 			edition=int(request.POST['edition']),
 			publisher=request.POST['publisher'],
 			ISBN=request.POST['ISBN'],
 		)
-		if len(book_exists) > 0:
-			book = book_exists[0]
+		if len(book_exists)>0:
+			book=book_exists[0]
 		else:
-			book = Book.objects.create(
+			book=Book.objects.create(
 				title=request.POST['title'],
 				author=request.POST['author'],
 				edition=int(request.POST['edition']),
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
 			)
-		want = Wants.objects.create(
-			buyer=user,
-			book=book,
-			condition=request.POST['condition'],
-			price=request.POST['price']
-		)
-	return redirect('/books')
-
 
 
 def edit_want(request, id):

@@ -43,8 +43,12 @@ def success(request):
     return redirect('/books')
 
 def editpage(request, id):
+    user = User.objects.get(id=id)
     data = {
-        'user': User.objects.filter(id = id)
+        'name': user.name,
+        'alias': user.alias,
+        'email': user.email,
+        'college': user.college,
     }
     return render(request, "log_reg/user.html", data)
 
