@@ -57,45 +57,62 @@
 
 <!-- Everything in the page goes inside of this container -->
     <div class="container">
-        <div class="left-panel">
-            <h3>Books Available For Sale</h3>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Author</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td><a href="/books/{{book.id}}/show">view</a> | <a href="/books/{{book.id}}/edit">edit</a> | <a href="/books/{{book.id}}/delete">delete</a></td>
-                </tr>
-               </tbody>
-            </table>
-            <a href="/books/add">Add Book</a>
-        </div>
-        <div class="right-panel">
-            <h3>My Wishlist</h3>
-            <table class="table">
-              <thead class="thead-dark">
-                <tr>
-                 <th scope="col">Title</th>
-                  <th scope="col">Author</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                </tr>
-              </tbody>
-            </table>
-            <a href=""><span style="float:right;">Add more</span></a>
+        <div class="row">
+            <div class="col-6">
+                <h3>Books Available For Sale</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in for_sale %}
+                        <tr>
+                            <td>{{item.book.title}}</th>
+                            <td>{{item.book.author}}</td>
+                            <td><a href="/books/{{item.id}}/show">view</a> | <a href="/books/{{item.id}}/edit">edit</a> | <a href="/books/{{item.id}}/delete">delete</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                        <tr>
+                            <td>Hardcoded title</td>
+                            <td>Hardcoded author</td>
+                            <td><a href="/books/42/show">view</a> | <a href="/books/42/edit">edit</a> | <a href="/books/42/delete">delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/books/sell">Add Book</a>
+            </div>
+            <div class="col-6">
+                <h3>My Wishlist</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in wish_list %}
+                        <tr>
+                            <td>{{item.book.title}}</th>
+                            <td>{{item.book.author}}</td>
+                            <td><a href="/books/{{item.id}}/show">view</a> | <a href="/books/{{item.id}}/edit">edit</a> | <a href="/books/{{item.id}}/delete">delete</a></td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>Hardcoded title</td>
+                            <td>Hardcoded author</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href=""><span style="float:right;">Add more</span></a>
+            </div>
         </div>
 
     </div>
