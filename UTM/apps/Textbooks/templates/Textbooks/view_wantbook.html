@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+      <!-- some cool icons from fontawesome.com -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous">
+
+    <title>Book View</title>
+    <style>
+        /* *{
+            outline: 1px dotted red;
+        } */
+        .navbar {
+            background-color: rgb(111, 182, 65)
+        }
+        .container {
+            margin: auto;
+            padding: 20px 0;
+            width: 70%;
+        }
+        h2{
+            text-align: center;
+        }
+        .information, .pictures{
+            display: inline-block;
+            width: 49%;
+            padding: 10px;
+            vertical-align: top;
+        }
+        span{
+            font-weight: bold;
+        }
+        img{
+            min-width: 300px;
+            min-height: 300px;
+            outline: 1px dotted black;
+        }
+        textarea{
+            width: 400px;
+        }
+        .post_message{
+            margin-left: 28%;
+        }
+        .media{
+            padding-left: 35px;
+        }
+        .reply{
+            margin-left: 40px;
+        }
+        .comment-btn{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header class="d-flex navbar navbar-dark sticky-top">
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
+        <div class="p-2 nav-item">
+            <a href="/books"><button class=" btn btn-primary" type="button">Dashboard</button></a>
+        </div>
+        <div class="p-2 nav-item">
+            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+        </div>
+    </header>
+
+
+    <div class='container card bg-light'>
+        <!-- All book information goes in this box -->
+        <div class='main'>
+            <h2>{{info.book.title}}</h2>
+            <div class='pictures'>
+                <img src="" alt="Placeholder for cover picture">
+                <img src="" alt="Placeholder for users picture">
+            </div>
+            <div class='information p-4 mb-2 bg-info text-white'>
+                <h4><span>Price: </span> {{info.display_price}}</h4>
+                <p><span>Condition: </span>  {{info.condition}}</p>
+                <p><span>Edition: </span>  {{info.book.edition}}</p>
+                <p><span>Author: </span>  {{info.book.author}}</p>
+                <p><span>Publisher: </span>  {{info.book.publisher}}</p>
+                <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
+               <!--  <p><span>Sold by: </span>  {{info.seller.alias}}</p>
+                <p><span>Description: </span> {{info.description}}</p> -->
+            </div>
+        </div>
+        <!-- All messages and comments in here -->
+        <div class = 'comments'>
+            <div class='post_message'>
+                <h4>Interested? Ask a question or make an offer!</h4>
+                <div class="media">
+                    <form action="{% url 'message' %}" method='post'>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea name='message'></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Post Message</button>
+                    </form>
+                </div>
+            </div>
+            {%for message in messages reversed%}
+            <div class='media'>
+                <div class='media-body'>
+                    <h5>{{message.posted_by.alias}} - {{message.created_at}}</h5>
+                    <p>{{message.content}}</p>
+                    {%for comment in message.comments.all%}
+                    <div class='media mt-3'>
+                        <div class="media-body">
+                            <h6>{{comment.on_message.on_book.seller.alias}} - {{comment.created_at}}</h6>
+                            <p>{{comment.content}}</p>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    <div class = 'reply'>
+                        {%if request.session.id == message.on_book.seller.id %}
+                        <form action="{% url 'comment' %}" method='post' class='inline'>
+                            {% csrf_token %}
+                            <textarea name='comment'></textarea>
+                            <input type='hidden' value={{message.id}} name='message_id'>
+                            <button class="comment-btn btn btn-primary btn-block" type="submit">Post Comment</button>
+                        </form>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</body>
+</html>

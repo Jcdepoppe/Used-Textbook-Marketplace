@@ -123,8 +123,14 @@ def delete_sell(request, id):
 def show_want(request, id):
 	if 'id' not in request.session:
 		return redirect('/')
-	response = "Individual wishlist book page"
-	return HttpResponse(response)
+	request.session['sells_id'] = id
+	info = Wants.objects.get(id = id)
+	data ={
+		'info': info,
+		# 'messages': Message.objects.filter(on_book = info),
+		# 'comments': Comment.objects.filter(on_message = Message.objects.filter(on_book = info)),
+	}
+	return render(request, 'Textbooks/view_wantbook.html', data)
 
 
 def want_book(request):
