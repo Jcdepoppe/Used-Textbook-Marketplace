@@ -12,7 +12,7 @@ class Book(models.Model):
     edition = models.SmallIntegerField()
     publisher = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
-    ISBN = models.BigIntegerField(default=0)
+    ISBN = models.CharField(max_length = 13, default="0")
     cover = models.ImageField(blank=True, null=True, upload_to='covers/', verbose_name="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -34,7 +34,7 @@ class Wants(models.Model):
     book = models.ForeignKey(Book, related_name='wanted')
     condition = models.SmallIntegerField()
     price = models.IntegerField(null=True)
-    distance = models.IntegerField()
+    distance = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def display_price(self):
