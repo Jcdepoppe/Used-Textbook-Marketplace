@@ -12,6 +12,8 @@
     <!-- some cool icons from fontawesome.com -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
+    <!-- JQuery -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 
 
@@ -126,12 +128,14 @@
                             Upload an image of your book
                         </div>
                         <div class="row col-sm-9 input-group">
-                            <label class="input-group-btn">
-                                <span class="btn btn-primary">
-                                    Browse&hellip; <input type="file" style="display: none;" multiple>
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" readonly>
+                            <div class="input-group">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary">
+                                        Browse&hellip; <input type="file" style="display: none;" name="picture">
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" readonly>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
