@@ -38,8 +38,8 @@
             font-weight: bold;
         }
         img{
-            min-width: 300px;
-            min-height: 300px;
+            max-width: 300px;
+            max-height: 300px;
             outline: 1px dotted black;
         }
         textarea{
@@ -67,7 +67,7 @@
             <a href="/books"><button class=" btn btn-primary" type="button">Dashboard</button></a>
         </div>
         <div class="p-2 nav-item">
-            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+            <a href="/"><button class="btn btn-primary" type="button">Logout</button></a></li>
         </div>
     </header>
 
@@ -78,7 +78,7 @@
             <h2>{{info.book.title}}</h2>
             <div class='pictures'>
                 <img src="" alt="Placeholder for cover picture">
-                <img src="" alt="Placeholder for users picture">
+                <img src="/media/{{info.picture}}" alt="Placeholder for users picture">
             </div>
             <div class='information p-4 mb-2 bg-info text-white'>
                 <h4><span>Price: </span> {{info.display_price}}</h4>
@@ -93,6 +93,7 @@
         </div>
         <!-- All messages and comments in here -->
         <div class = 'comments'>
+            {%if request.session.id != info.seller.id%}
             <div class='post_message'>
                 <h4>Interested? Ask a question or make an offer!</h4>
                 <div class="media">
@@ -105,6 +106,7 @@
                     </form>
                 </div>
             </div>
+            {%endif%}
             {%for message in messages reversed%}
             <div class='media'>
                 <div class='media-body'>

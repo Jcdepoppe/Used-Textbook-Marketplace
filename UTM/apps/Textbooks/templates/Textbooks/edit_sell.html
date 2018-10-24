@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -12,48 +11,39 @@
     <!-- some cool icons from fontawesome.com -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
-    <!-- JQuery -->
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-
-
-    <!-- *************************************************************************
-        ******* Make sure to modify the title of the page ************************
-        ************************************************************************** -->
-    <title>UTM: Sell a book</title>
+    <title>Edit book sale</title>
     <style>
         .navbar {
             background-color: rgb(111, 182, 65)
         }
-
         .container {
             margin: auto;
             padding: 20px 0;
             width: 70%;
         }
+        .input-group-btn{
+            margin-left: 15px;
+        }
     </style>
-
 </head>
 
 <body>
     <header class="d-flex navbar navbar-dark sticky-top">
         <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
-        <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
         <div class="p-2 nav-item">
-            <a href="/books"><button class=" btn btn-primary" type="button">Go to Dashboard</button></a>
+            <a href=""><button class=" btn btn-primary" type="button">Button name</button></a>
         </div>
         <div class="p-2 nav-item">
             <a href="/"><button class="btn btn-primary" type="button">Logout</button></a></li>
         </div>
     </header>
 
-
-    <!-- Everything in the page goes inside of this container -->
     <div class="container">
         <div class="card bg-light">
             <div class="card-body">
-                <h1 class="card-title">Enter your textbook information</h1>
-                <form action="/books/sell/process" method="POST" enctype="multipart/form-data">
+                <h1 class="card-title">Edit your textbook information</h1>
+                <form action="/books/sell/update" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 <!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->
                     <div class="form-group row">
@@ -61,7 +51,7 @@
                             Title
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title">
+                            <input type="text" class="form-control" name="title" value="{{book.book.title}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -69,7 +59,7 @@
                             Author
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="author">
+                            <input type="text" class="form-control" name="author" value="{{book.book.author}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -77,7 +67,7 @@
                             Edition
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="edition">
+                            <input type="text" class="form-control" name="edition" value="{{book.book.edition}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -85,7 +75,7 @@
                             Publisher
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="publisher">
+                            <input type="text" class="form-control" name="publisher" value="{{book.book.publisher}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,7 +83,7 @@
                             ISBN 
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="ISBN">
+                            <input type="text" class="form-control" name="ISBN" value="{{book.book.ISBN}}">
                             <small>No dashes or spaces</small>
                         </div>
                     </div>
@@ -107,7 +97,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select class="form-control" name="condition">
-                                <option value="5">New</option>
+                                <option value="5" selected>New</option>
                                 <option value="4">Used - Like New</option>
                                 <option value="3">Used - Very Good</option>
                                 <option value="2">Used - Good</option>
@@ -120,7 +110,7 @@
                             Description (mandatory for books in "Acceptable" condition)
                         </label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" name="description"></textarea>
+                            <textarea class="form-control" name="description">{{book.description}}</textarea>
                         </div>
                     </div>
                     <div class="form-group row d-flex">
@@ -143,19 +133,15 @@
                             Price
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="price">
+                            <input type="text" class="form-control" name="price" value="{{book.display_price}}">
                         </div>
                     </div>
-
-                    <input type="submit" class="btn btn-outline-secondary btn-block" value="Create">
+                    <input type='hidden' value={{book.id}} name='book_id'>
+                    <input type="submit" class="btn btn-outline-secondary btn-block" value="Update">
                 </form>
             </div>
         </div>
 
     </div>
 </body>
-
-{% load static %}
-<script src="{% static 'Textbooks/js/fileinput.js' %}"></script>
-
 </html>

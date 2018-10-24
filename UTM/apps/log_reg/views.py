@@ -6,7 +6,6 @@ from django.contrib import messages
 import bcrypt
 
 def index(request):
-    request.session['test'] = 0
     request.session.clear()
     return render(request, "log_reg/index.html")
 

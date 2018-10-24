@@ -6,6 +6,8 @@ from apps.log_reg.models import *
 
 
 def index(request):
+	if 'id' not in request.session:
+		return redirect('/')
 	user=User.objects.get(id=request.session['id'])
 	context ={
 		"for_sale" : Sells.objects.filter(seller=user),
@@ -69,7 +71,7 @@ def sell_book_process(request):
 			book=Book.objects.create(
 				title=request.POST['title'],
 				author=request.POST['author'],
-				edition=int(request.POST['edition']),
+				edition=float(request.POST['edition']),
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
 			)
@@ -81,7 +83,7 @@ def sell_book_process(request):
 			book=book, 
 			seller=user, 
 			condition=request.POST['condition'],
-			price=int(request.POST['price'])*100,
+			price=float(request.POST['price'])*100,
 			picture= picture,
 			description=request.POST['description'],
 		)
@@ -89,13 +91,47 @@ def sell_book_process(request):
 
 
 def edit_sell(request, id):
-	response = "Edit book for sale page"
-	return HttpResponse(response)
+	data ={
+		'book': Sells.objects.get(id = id)
+	}
+	return render(request, 'Textbooks/edit_sell.html', data)
+
+def update_sell(request):
+	if request.method =="POST":
+		update = Sells.objects.get(id = request.POST['book_id'])
+		update.condition = request.POST['condition']
+		update.description = request.POST['description']
+		if 'picture' in request.FILES:
+			update.picture = request.FILES['picture']
+		update.price = float(request.POST['price'])*100
+
+		book_exists = Book.objects.filter(
+			title=request.POST['title'], 
+			author=request.POST['author'],
+			edition=int(request.POST['edition']),
+			publisher=request.POST['publisher'],
+			ISBN=request.POST['ISBN'],
+		)
+		if len(book_exists)>0:
+			book=book_exists[0]
+		else:
+			book=Book.objects.create(
+				title=request.POST['title'],
+				author=request.POST['author'],
+				edition=int(request.POST['edition']),
+				publisher=request.POST['publisher'],
+				ISBN=request.POST['ISBN'],
+			)
+		update.book = book
+		update.save()
+	return redirect('/books')
+
 
 
 def delete_sell(request, id):
-	response = "Delete book for sale"
-	return HttpResponse(response)
+	delete = Sells.objects.get(id = id)
+	delete.delete()
+	return redirect('/books')
 
 
 def show_want(request, id):

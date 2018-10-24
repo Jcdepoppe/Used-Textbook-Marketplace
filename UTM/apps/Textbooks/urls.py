@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^sell$', views.sell_book),
 	url(r'^sell/process$', views.sell_book_process),
 	url(r'^sell/(?P<id>\d+)/edit$', views.edit_sell),
+	url(r'^sell/update$', views.update_sell),
 	url(r'^sell/(?P<id>\d+)/delete$', views.delete_sell),
 	######## BOOKS WISHLIST ##############
 	url(r'^want/(?P<id>\d+)/show$', views.show_want),
