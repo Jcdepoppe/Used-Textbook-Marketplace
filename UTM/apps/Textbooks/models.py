@@ -26,6 +26,8 @@ class Sells(models.Model):
     description = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def display_price(self):
+        return self.price / 100
 
 class Wants(models.Model):
     buyer = models.ForeignKey(User, related_name='wants')
@@ -35,6 +37,8 @@ class Wants(models.Model):
     distance = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def display_price(self):
+        return self.price / 100
 
 class Message(models.Model):
     content = models.TextField()

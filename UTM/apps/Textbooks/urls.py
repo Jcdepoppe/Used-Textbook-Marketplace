@@ -8,7 +8,7 @@ urlpatterns = [
 	url(r'^add$', views.addNewbook),
 	################################
 	###### BOOKS FOR SALE ###############
-	url(r'^sell/(?P<id>\d+)/show$', views.show_sell),
+	url(r'^sell/(?P<id>\d+)/show$', views.show_sell, name='show_sell'),
 	url(r'^sell$', views.sell_book),
 	url(r'^sell/process$', views.sell_book_process),
 	url(r'^sell(?P<id>\d+)/edit$', views.edit_sell),
