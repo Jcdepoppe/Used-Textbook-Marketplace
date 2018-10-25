@@ -66,6 +66,7 @@ def edit(request):
         user.alias = request.POST['alias']
         user.email = request.POST['email']
         user.college = request.POST['college']
+        user.password = bcrypt.hashpw(request.POST['new_password'].encode(), bcrypt.gensalt())
         user.save()
         request.session['alias'] = user.alias
     return redirect('/books')
