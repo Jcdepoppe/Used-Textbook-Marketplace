@@ -67,3 +67,8 @@ def edit(request):
         update.save()
     return redirect('/books')
 
+
+def reset(request):
+    request.session.clear()
+    return redirect('/')
+

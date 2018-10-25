@@ -3,14 +3,21 @@ from apps.log_reg.models import *
 from .models import *
 from django.core.urlresolvers import reverse
 from apps.log_reg.models import *
+from django.db.models import Count
 
 
 def index(request):
 	if 'id' not in request.session:
 		return redirect('/')
 	user=User.objects.get(id=request.session['id'])
+	wish_list = Wants.objects.filter(buyer=user)
+	# with_matches = wish_list.filter
+	for_sale = Sells.objects.filter(seller=user).annotate(num_msg=Count('messages'))
+	with_unread_message = for_sale.filter(num_msg__gt=0).filter(messages__comments__isnull=True)
+	rest_for_sale=for_sale.exclude(id__in=with_unread_message)
 	context ={
-		"for_sale" : Sells.objects.filter(seller=user),
+		"fs_badge" : with_unread_message,
+		"fs_rest" : rest_for_sale,
 		"wish_list": Wants.objects.filter(buyer=user),
 	}
 	return render(request, "Textbooks/mainpage.html", context)
@@ -159,7 +166,7 @@ def want_book_process(request):
 			buyer=user,
 			book=book,
 			condition=request.POST['condition'],
-			price=request.POST['price']
+			price=float(request.POST['price'])*100
 		)
 	return redirect('/books')
 

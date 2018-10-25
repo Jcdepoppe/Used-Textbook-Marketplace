@@ -58,7 +58,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h3>Books Available For Sale</h3>
+                <h3>Books You Are Selling</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -68,23 +68,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in for_sale %}
+                        {% for item in fs_badge %}
                         <tr>
                             <td>{{item.book.title}}</th>
                             <td>{{item.book.author}}</td>
-                            <td><a href="/books/sell/{{item.id}}/show">view</a> | <a href="/books/sell/{{item.id}}/edit">edit</a> | <a href="/books/sell/{{item.id}}/delete">delete</a></td>
+                            <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View <span class="badge badge-success">msg</span></button></a>
+                                <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>
+                                <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
+                        </tr>
+                        {% endfor %}
+                        {% for item in fs_rest %}
+                        <tr>
+                            <td>{{item.book.title}}</th>
+                            <td>{{item.book.author}}</td>
+                            <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View</button></a>  <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>  <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
 
-
-                        <tr>
-                            <td>Hardcoded title</td>
-                            <td>Hardcoded author</td>
-                            <td><a href="/books/sell/42/show">view</a> | <a href="/books/sell/42/edit">edit</a> | <a href="/books/sell/42/delete">delete</a></td>
-                        </tr>
                     </tbody>
                 </table>
-                <a href="/books/sell">Add Book</a>
+                <a href="/books/sell"><button class="btn  btn-primary" type="button">Add a book for sale</button></a>
             </div>
             <div class="col-6">
                 <h3>My Wishlist</h3>
@@ -101,16 +104,12 @@
                         <tr>
                             <td>{{item.book.title}}</th>
                             <td>{{item.book.author}}</td>
-                            <td><a href="/books/want/{{item.id}}/show">view</a> | <a href="/books/want/{{item.id}}/edit">edit</a> | <a href="/books/want/{{item.id}}/delete">delete</a></td>
+                            <td><a href="/books/want/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View</button></a>  <a href="/books/want/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>  <a href="/books/want/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
-                        <tr>
-                            <td>Hardcoded title</td>
-                            <td>Hardcoded author</td>
-                        </tr>
                     </tbody>
                 </table>
-                <a href="/books/want"><span style="float:right;">Add more</span></a>
+                <a href="/books/want"><span style="float:right;"><button class="btn  btn-primary" type="button">Add a book to your wishlist</button></span></a>
             </div>
         </div>
 
