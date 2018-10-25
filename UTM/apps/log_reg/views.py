@@ -23,6 +23,7 @@ def register(request):
         user = User.objects.last()
         request.session['id'] = user.id
         request.session['name'] = user.name
+        request.session['alias'] = user.alias
         return redirect('/success')
     return redirect('/')
 
@@ -36,6 +37,7 @@ def login(request):
         user = User.objects.get(email=request.POST['emaillogin'])
         request.session['id'] = user.id
         request.session['name'] = user.name
+        request.session['alias'] = user.alias
         return redirect('/success')
     return redirect('/')
 
@@ -59,11 +61,12 @@ def edit(request):
             for key, value in errors.items():
                 messages.error(request, value)
             return redirect(reverse('editpage', kwargs={'id': request.session['id'] }))
-        update = User.objects.get(id = request.session['id'])
-        update.name = request.POST['name']
-        update.alias = request.POST['alias']
-        update.email = request.POST['email']
-        update.college = request.POST['college']
-        update.save()
+        user = User.objects.get(id = request.session['id'])
+        user.name = request.POST['name']
+        user.alias = request.POST['alias']
+        user.email = request.POST['email']
+        user.college = request.POST['college']
+        user.save()
+        request.session['alias'] = user.alias
     return redirect('/books')
 

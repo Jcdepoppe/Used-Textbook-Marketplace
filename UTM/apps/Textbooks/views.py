@@ -125,10 +125,13 @@ def show_want(request, id):
 		return redirect('/')
 	request.session['sells_id'] = id
 	info = Wants.objects.get(id = id)
+	sells_info = Sells.objects.filter(book=info.book)
+	number_of_matches = Sells.objects.filter(book=info.book).count()
+	# if sells_info.price < info.price
 	data ={
 		'info': info,
-		# 'messages': Message.objects.filter(on_book = info),
-		# 'comments': Comment.objects.filter(on_message = Message.objects.filter(on_book = info)),
+		'sells_info' : sells_info,
+		'number_of_matches' : number_of_matches
 	}
 	return render(request, 'Textbooks/view_wantbook.html', data)
 

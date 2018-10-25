@@ -16,6 +16,8 @@ class Book(models.Model):
     cover = models.ImageField(blank=True, null=True, upload_to='covers/', verbose_name="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.title
 
 class Sells(models.Model):
     seller = models.ForeignKey(User, related_name='sells')
@@ -28,6 +30,8 @@ class Sells(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def display_price(self):
         return self.price / 100
+    def __str__(self):
+        return (self.book, self.seller)
 
 class Wants(models.Model):
     buyer = models.ForeignKey(User, related_name='wants')
@@ -39,6 +43,9 @@ class Wants(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def display_price(self):
         return self.price / 100
+    # def __repr__(self):
+    #     return "{}" .format(self.book)
+
 
 class Message(models.Model):
     content = models.TextField()
