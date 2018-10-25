@@ -11,14 +11,21 @@ def index(request):
 		return redirect('/')
 	user=User.objects.get(id=request.session['id'])
 	wish_list = Wants.objects.filter(buyer=user)
-	# with_matches = wish_list.filter
+	books_in_sales= Book.objects.annotate(sales=Count('for_sale')).filter(sales__gt=0)
+	# items on my wishlist that have a matching for-sale item
+	with_matches = wish_list.filter(book__id__in=books_in_sales)
+	no_match = wish_list.exclude(id__in=with_matches)
+
 	for_sale = Sells.objects.filter(seller=user).annotate(num_msg=Count('messages'))
+	# items for sale with messages that have not been answered (will have a badge):
 	with_unread_message = for_sale.filter(num_msg__gt=0).filter(messages__comments__isnull=True)
 	rest_for_sale=for_sale.exclude(id__in=with_unread_message)
 	context ={
 		"fs_badge" : with_unread_message,
 		"fs_rest" : rest_for_sale,
-		"wish_list": Wants.objects.filter(buyer=user),
+		"wl_badge": with_matches,
+		"wl_rest" : no_match,
+
 	}
 	return render(request, "Textbooks/mainpage.html", context)
 
