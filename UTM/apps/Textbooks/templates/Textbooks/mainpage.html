@@ -22,6 +22,13 @@
         .navbar {
             background-color: rgb(111, 182, 65)
         }
+        .navbar-text {
+            display: inline-block;
+            padding-top: .5rem;
+            /* align-self: stretch; */
+            margin-left: 44px;
+            padding-bottom: -.5rem; 
+        }
         .container {
             margin: auto;
             padding: 20px 0;
@@ -43,13 +50,13 @@
 
 <body>
     <header class="d-flex navbar navbar-dark sticky-top">
-        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace  <span class="navbar-text">Welcome {{request.session.alias}}</span></span>
         <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
         <div class="p-2 nav-item">
             <a href="/edit/{{request.session.id}}"><button class=" btn btn-primary" type="button">Edit Profile</button></a>
         </div>
         <div class="p-2 nav-item">
-            <a href="/reset"><button class="btn btn-primary" type="button">Logout</button></a></li>
+            <a href="/"><button class="btn btn-primary" type="button">Logout</button></a></li>
         </div>
     </header>
 
@@ -77,7 +84,9 @@
                                 <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
+              
                         {% for item in fs_rest %}
+
                         <tr>
                             <td>{{item.book.title}}</th>
                             <td>{{item.book.author}}</td>
@@ -88,6 +97,7 @@
                     </tbody>
                 </table>
                 <a href="/books/sell"><button class="btn  btn-primary" type="button">Add a book for sale</button></a>
+
             </div>
             <div class="col-6">
                 <h3>My Wishlist</h3>
@@ -119,6 +129,7 @@
                     </tbody>
                 </table>
                 <a href="/books/want"><span style="float:right;"><button class="btn  btn-primary" type="button">Add a book to your wishlist</button></span></a>
+
             </div>
         </div>
 

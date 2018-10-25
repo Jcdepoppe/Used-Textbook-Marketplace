@@ -137,8 +137,17 @@ def delete_sell(request, id):
 def show_want(request, id):
 	if 'id' not in request.session:
 		return redirect('/')
-	response = "Individual wishlist book page"
-	return HttpResponse(response)
+	request.session['sells_id'] = id
+	info = Wants.objects.get(id = id)
+	sells_info = Sells.objects.filter(book=info.book)
+	number_of_matches = Sells.objects.filter(book=info.book).count()
+	# if sells_info.price < info.price
+	data ={
+		'info': info,
+		'sells_info' : sells_info,
+		'number_of_matches' : number_of_matches
+	}
+	return render(request, 'Textbooks/view_wantbook.html', data)
 
 
 def want_book(request):
