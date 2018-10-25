@@ -57,6 +57,9 @@
         .comment-btn{
             width: 200px;
         }
+        .main{
+            display:inline-block;
+        }
     </style>
 </head>
 <body>
@@ -76,10 +79,10 @@
         <!-- All book information goes in this box -->
         <div class='main'>
             <h2>{{info.book.title}}</h2>
-            <div class='pictures'>
+            <!-- <div class='pictures'>
                 <img src="" alt="Placeholder for cover picture">
                 <img src="" alt="Placeholder for users picture">
-            </div>
+            </div> -->
             <div class='information p-4 mb-2 bg-info text-white'>
                 <h4><span>Price: </span> {{info.display_price}}</h4>
                 <p><span>Condition: </span>  {{info.condition}}</p>
@@ -89,49 +92,24 @@
                 <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
                <!--  <p><span>Sold by: </span>  {{info.seller.alias}}</p>
                 <p><span>Description: </span> {{info.description}}</p> -->
+                <a href="/books/want/{{info.book_id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.book_id}}/delete"><span style="color:black;">Delete</span></a>
+            </div>
+            
+      <!--  -->
+        </div>
+        <p style="margin-left: 10px;"></p>
+        Matches Found ({{number_of_matches}})
+        {% for item in sells_info %}
+            <div class='information p-4 mb-2 bg-info text-white'>
+                <h4><span>Title : </span> {{item.book.title}}</h4>
+                <p><span>Sell By : </span>  
+                {{item.seller.name}}</p>
+                <p><span>Price : </span>  {{item.price}}</p>
+               <a href="/books/sell/{{info.book_id}}/show"><span style="color:black;">View</span></a>
+            {% endfor %}
             </div>
         </div>
-        <!-- All messages and comments in here -->
-        <div class = 'comments'>
-            <div class='post_message'>
-                <h4>Interested? Ask a question or make an offer!</h4>
-                <div class="media">
-                    <form action="{% url 'message' %}" method='post'>
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <textarea name='message'></textarea>
-                        </div>
-                        <button class="btn btn-primary btn-block" type="submit">Post Message</button>
-                    </form>
-                </div>
-            </div>
-            {%for message in messages reversed%}
-            <div class='media'>
-                <div class='media-body'>
-                    <h5>{{message.posted_by.alias}} - {{message.created_at}}</h5>
-                    <p>{{message.content}}</p>
-                    {%for comment in message.comments.all%}
-                    <div class='media mt-3'>
-                        <div class="media-body">
-                            <h6>{{comment.on_message.on_book.seller.alias}} - {{comment.created_at}}</h6>
-                            <p>{{comment.content}}</p>
-                        </div>
-                    </div>
-                    {%endfor%}
-                    <div class = 'reply'>
-                        {%if request.session.id == message.on_book.seller.id %}
-                        <form action="{% url 'comment' %}" method='post' class='inline'>
-                            {% csrf_token %}
-                            <textarea name='comment'></textarea>
-                            <input type='hidden' value={{message.id}} name='message_id'>
-                            <button class="comment-btn btn btn-primary btn-block" type="submit">Post Comment</button>
-                        </form>
-                        {%endif%}
-                    </div>
-                </div>
-            </div>
-            {%endfor%}
-        </div>
+
     </div>
 </body>
 </html>
