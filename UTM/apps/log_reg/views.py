@@ -71,3 +71,8 @@ def edit(request):
         request.session['alias'] = user.alias
     return redirect('/books')
 
+
+def reset(request):
+    request.session.clear()
+    return redirect('/')
+
