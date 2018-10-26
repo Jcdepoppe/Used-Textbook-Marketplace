@@ -18,7 +18,7 @@ urlpatterns = [
 	url(r'^want/(?P<id>\d+)/show$', views.show_want, name='show_want'),
 	url(r'^want$', views.want_book),
 	url(r'^want/process$', views.want_book_process),
-	url(r'^want/(?P<id>\d+)/update', views.want_book_update),
+	url(r'^want/update', views.want_book_update),
 	url(r'^want/(?P<id>\d+)/edit$', views.edit_want),
 	url(r'^want/(?P<id>\d+)/delete$', views.delete_want),
 

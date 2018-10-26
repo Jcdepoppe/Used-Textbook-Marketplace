@@ -20,7 +20,7 @@
     <!-- *************************************************************************
         ******* Make sure to modify the title of the page ************************
         ************************************************************************** -->
-    <title>UTM: Edit a book</title>
+    <title>UTM: Edit a book on your wish list</title>
     <style>
         .navbar {
             background-color: rgb(111, 182, 65)
@@ -53,7 +53,7 @@
         <div class="card bg-light">
             <div class="card-body">
                 <h1 class="card-title">Edit the information of the textbook you want</h1>
-                <form action="/books/want/{{book.id}}/update" method="POST" enctype="multipart/form-data">
+                <form action="/books/want/update" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 <!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->
                     <div class="form-group row">
@@ -61,7 +61,7 @@
                             Title
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="title" value="{{book.title}}">
+                            <input type="text" class="form-control" name="title" value="{{item.book.title}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -69,23 +69,16 @@
                             Author
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="author" value="{{book.author}}">
+                            <input type="text" class="form-control" name="author" value="{{item.book.author}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="edition" class="col-sm-2 col-form-label">
-                            Edition
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="edition" value="{{book.edition}}">
-                        </div>
-                    </div>
+                    
                     <div class="form-group row">
                         <label for="publisher" class="col-sm-2 col-form-label">
                             Publisher
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="publisher" value="{{book.publisher}}">
+                            <input type="text" class="form-control" name="publisher" value="{{item.book.publisher}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,7 +86,7 @@
                             ISBN 
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="ISBN" value="{{book.ISBN}}">
+                            <input type="text" class="form-control" name="ISBN" value="{{item.book.ISBN}}">
                             <small>No dashes or spaces</small>
                         </div>
                     </div>
@@ -122,7 +115,7 @@
                             Price $
                         </label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="price" value="{{info.price}}">
+                            <input type="text" class="form-control" name="price" value="{{item.actual_price}}">
                         </div>
                         <div class="col-sm-4"> or less</div>
                     </div>
@@ -134,8 +127,5 @@
 
     </div>
 </body>
-
-{% load static %}
-<script src="{% static 'Textbooks/js/fileinput.js' %}"></script>
 
 </html>

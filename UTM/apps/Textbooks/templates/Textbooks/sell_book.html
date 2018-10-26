@@ -53,15 +53,11 @@
     <div class="container">
         <div class="card bg-light">
             <div class="card-body">
-                <p>
-                    <label for="txtBookSearch">select a book</label>
-                    <input id="txtBookSearch" type="text">
-                </p>
-                
-                    <h2>book details</h2>
+                <label for="txtBookSearch"><h5>Search for a book:</h5></label>
+                <input id="txtBookSearch" type="text">
                 <div id="divDescription"></div>
 
-                <h1 class="card-title">Enter your textbook information</h1>
+                <h5 class="card-title">Add details of your sale</h5>
                 <form action="/books/sell/process" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 <!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->

@@ -8,9 +8,9 @@
         crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-      <!-- some cool icons from fontawesome.com -->
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-      crossorigin="anonymous">
+    <!-- some cool icons from fontawesome.com -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+    crossorigin="anonymous">
 
     <title>Book View</title>
     <style>
@@ -84,31 +84,29 @@
                 <img src="" alt="Placeholder for users picture">
             </div> -->
             <div class='information p-4 mb-2 bg-info text-white'>
-                <h4><span>Price: </span> {{info.display_price}}</h4>
-                <p><span>Condition: </span>  {{info.condition}}</p>
-                <p><span>Edition: </span>  {{info.book.edition}}</p>
+                <h4><span>Price: </span> {{info.display_price}} or less</h4>
+                <p><span>Condition: </span>  {{info.condition}} or better</p>
                 <p><span>Author: </span>  {{info.book.author}}</p>
                 <p><span>Publisher: </span>  {{info.book.publisher}}</p>
                 <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
-               <!--  <p><span>Sold by: </span>  {{info.seller.alias}}</p>
+            <!--  <p><span>Sold by: </span>  {{info.seller.alias}}</p>
                 <p><span>Description: </span> {{info.description}}</p> -->
                 <a href="/books/want/{{info.book_id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.book_id}}/delete"><span style="color:black;">Delete</span></a>
             </div>
             
-      <!--  -->
         </div>
         <p style="margin-left: 10px;"></p>
         Matches Found ({{number_of_matches}})
         {% for item in sells_info %}
             <div class='information p-4 mb-2 bg-info text-white'>
                 <h4><span>Title : </span> {{item.book.title}}</h4>
-                <p><span>Sell By : </span>  
+                <p><span>Sold By : </span>  
                 {{item.seller.name}}</p>
-                <p><span>Price : </span>  {{item.price}}</p>
-               <a href="/books/sell/{{info.book_id}}/show"><span style="color:black;">View</span></a>
-            {% endfor %}
+                <p><span>Price : </span>  {{item.display_price}}</p>
+                <a href="/books/sell/{{info.book_id}}/show"><span style="color:black;">View</span></a>
             </div>
-        </div>
+        {% endfor %}
+        <!-- </div> -->
 
     </div>
 </body>
