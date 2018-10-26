@@ -3,15 +3,29 @@ from apps.log_reg.models import *
 from .models import *
 from django.core.urlresolvers import reverse
 from apps.log_reg.models import *
+from django.db.models import Count
 
 
 def index(request):
 	if 'id' not in request.session:
 		return redirect('/')
 	user=User.objects.get(id=request.session['id'])
+	wish_list = Wants.objects.filter(buyer=user)
+	books_in_sales= Book.objects.annotate(sales=Count('for_sale')).filter(sales__gt=0)
+	# items on my wishlist that have a matching for-sale item
+	with_matches = wish_list.filter(book__id__in=books_in_sales)
+	no_match = wish_list.exclude(id__in=with_matches)
+
+	for_sale = Sells.objects.filter(seller=user).annotate(num_msg=Count('messages'))
+	# items for sale with messages that have not been answered (will have a badge):
+	with_unread_message = for_sale.filter(num_msg__gt=0).filter(messages__comments__isnull=True)
+	rest_for_sale=for_sale.exclude(id__in=with_unread_message)
 	context ={
-		"for_sale" : Sells.objects.filter(seller=user),
-		"wish_list": Wants.objects.filter(buyer=user),
+		"fs_badge" : with_unread_message,
+		"fs_rest" : rest_for_sale,
+		"wl_badge": with_matches,
+		"wl_rest" : no_match,
+
 	}
 	return render(request, "Textbooks/mainpage.html", context)
 
@@ -158,10 +172,13 @@ def show_want(request, id):
 		return redirect('/')
 	request.session['sells_id'] = id
 	info = Wants.objects.get(id = id)
+	sells_info = Sells.objects.filter(book=info.book)
+	number_of_matches = Sells.objects.filter(book=info.book).count()
+	# if sells_info.price < info.price
 	data ={
 		'info': info,
-		# 'messages': Message.objects.filter(on_book = info),
-		# 'comments': Comment.objects.filter(on_message = Message.objects.filter(on_book = info)),
+		'sells_info' : sells_info,
+		'number_of_matches' : number_of_matches
 	}
 	return render(request, 'Textbooks/view_wantbook.html', data)
 
@@ -198,7 +215,7 @@ def want_book_process(request):
 			buyer=user,
 			book=book,
 			condition=request.POST['condition'],
-			price=request.POST['price']
+			price=float(request.POST['price'])*100
 		)
 	return redirect('/books')
 

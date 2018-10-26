@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^success$', views.success, name='success'),
     url(r'^edit/(?P<id>\d+)$', views.editpage, name='editpage'),
     url(r'^edit$', views.edit, name='edit'),
+    url(r'^reset$', views.reset, name='logout'),
 ]

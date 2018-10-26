@@ -22,6 +22,13 @@
         .navbar {
             background-color: rgb(111, 182, 65)
         }
+        .navbar-text {
+            display: inline-block;
+            padding-top: .5rem;
+            /* align-self: stretch; */
+            margin-left: 44px;
+            padding-bottom: -.5rem; 
+        }
         .container {
             margin: auto;
             padding: 20px 0;
@@ -43,7 +50,7 @@
 
 <body>
     <header class="d-flex navbar navbar-dark sticky-top">
-        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace</span>
+        <span class=" flex-grow-1 p-2 navbar-brand mb-0 h1">Used Textbook Marketplace  <span class="navbar-text">Welcome {{request.session.alias}}</span></span>
         <!-- uncomment any of the buttons below to show links on the right side of the navbar -->
         <div class="p-2 nav-item">
             <a href="/edit/{{request.session.id}}"><button class=" btn btn-primary" type="button">Edit Profile</button></a>
@@ -58,7 +65,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h3>Books Available For Sale</h3>
+                <h3>Books You Are Selling</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -68,24 +75,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in for_sale %}
+                        {% for item in fs_badge %}
                         <tr>
                             <td>{{item.book.title}}</th>
                             <td>{{item.book.author}}</td>
-                            <td><a href="/books/sell/{{item.id}}/show">view</a> | <a href="/books/sell/{{item.id}}/edit">edit</a> | <a href="/books/sell/{{item.id}}/delete">delete</a></td>
+                            <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View <span class="badge badge-success">msg</span></button></a>
+                                <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>
+                                <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
+                        </tr>
+                        {% endfor %}
+              
+                        {% for item in fs_rest %}
+
+                        <tr>
+                            <td>{{item.book.title}}</th>
+                            <td>{{item.book.author}}</td>
+                            <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View</button></a>  <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>  <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
 
-                         <!-- We don't need these anymore 
-                        <tr>
-                            <td>Hardcoded title</td>
-                            <td>Hardcoded author</td>
-                            <td><a href="/books/sell/42/show">view</a> | <a href="/books/sell/42/edit">edit</a> | <a href="/books/sell/42/delete">delete</a></td>
-                        </tr>
-                        -->
                     </tbody>
                 </table>
-                <a href="/books/sell">Add Book</a>
+                <a href="/books/sell"><button class="btn  btn-primary" type="button">Add a book for sale</button></a>
+
             </div>
             <div class="col-6">
                 <h3>My Wishlist</h3>
@@ -98,22 +110,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in wish_list %}
+                        {% for item in wl_badge %}
                         <tr>
                             <td>{{item.book.title}}</th>
                             <td>{{item.book.author}}</td>
-                            <td><a href="/books/want/{{item.id}}/show">view</a> | <a href="/books/want/{{item.id}}/edit">edit</a> | <a href="/books/want/{{item.id}}/delete">delete</a></td>
+                            <td><a href="/books/want/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View <span class="badge badge-success">match</span></button></a>  <a href="/books/want/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>  <a href="/books/want/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
-                        <!-- We don't need these anymore 
+                        {% for item in wl_rest %}
                         <tr>
-                            <td>Hardcoded title</td>
-                            <td>Hardcoded author</td>
+                            <td>{{item.book.title}}</th>
+                            <td>{{item.book.author}}</td>
+                            <td><a href="/books/want/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View</button></a>
+                                <a href="/books/want/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>
+                                <a href="/books/want/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
-                        -->
+                        {% endfor %}
                     </tbody>
                 </table>
-                <a href="/books/want"><span style="float:right;">Add more</span></a>
+                <a href="/books/want"><span style="float:right;"><button class="btn  btn-primary" type="button">Add a book to your wishlist</button></span></a>
+
             </div>
         </div>
 
