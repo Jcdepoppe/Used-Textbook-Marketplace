@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 	url(r'^$', views.index),
 	#Do we still need this add url?
-	url(r'^add$', views.addNewbook),
+	# url(r'^add$', views.addNewbook),
 	################################
 	###### BOOKS FOR SALE ###############
 	url(r'^sell/(?P<id>\d+)/show$', views.show_sell, name='show_sell'),

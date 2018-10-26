@@ -51,9 +51,9 @@ $(document).ready(function () { // only begin once page has loaded
             $('#bookInfo').empty();
             // The value only saves one 'word'(A string that removes everything after the first space it hits). 
             //I don't know if it is an issue here or in the html
-            $('#bookinfo').append("<input type='hidden' value="+ui.item.title+" name='title'>");
-            $('#bookinfo').append("<input type='hidden' value= " + ui.item.author + " name='author'>");
-            $('#bookinfo').append("<input type='hidden' value=" +ui.item.publisher+ " name='publisher'>");
+            $('#bookinfo').append("<input type='hidden' value="+"'"+ui.item.title+"'"+" name='title'>");
+            $('#bookinfo').append("<input type='hidden' value= " + "'"+ui.item.author+"'" + " name='author'>");
+            $('#bookinfo').append("<input type='hidden' value="+"'" +ui.item.publisher+"'"+ " name='publisher'>");
             $('#bookinfo').append("<input type='hidden' value=" +ui.item.isbn[0].identifier+" name='ISBN'>");
             
         },
