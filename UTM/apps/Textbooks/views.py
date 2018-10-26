@@ -224,12 +224,32 @@ def want_book_process(request):
 def edit_want(request, id):
 	if 'id' not in request.session:
 		return redirect('/')
-	response = "Edit want book page"
-	return HttpResponse(response)
+	return render(request, 'Textbooks/edit_wantbook.html', {'book' : Book.objects.get(id=id), 'info': Wants.objects.get(id = id) })
+
+
+def want_book_update(request,id):
+	if 'id' not in request.session:
+		return redirect('/')
+	user = User.objects.get(id=request.session['id'])
+	book = Book.objects.get(id=id)
+	book.title = request.POST['title']
+	book.author = request.POST['author']
+	book.edition = request.POST['edition']
+	book.publisher = request.POST['publisher']
+	book.ISBN = request.POST['ISBN']
+	book.save()
+	want = Wants.objects.get(id=id)
+	want.buyer = user
+	want.book = book
+	want.condition = request.POST['condition']
+	want.price = request.POST['price']
+	want.save()
+	return redirect('/books')
 
 
 def delete_want(request, id):
 	if 'id' not in request.session:
 		return redirect('/')
-	response = "Delete want book"
-	return HttpResponse(response)
+	book = Book.objects.get(id=id)
+	book.delete()
+	return redirect('/books')
