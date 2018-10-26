@@ -79,7 +79,7 @@
                     <tbody>
                         {% for item in fs_badge %}
                         <tr>
-                            <td>{{item.book.title}}</th>
+                            <td>{{item}}</th>
                             <td>{{item.book.author}}</td>
                             <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View <span class="badge badge-success">msg</span></button></a>
                                 <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>
@@ -90,7 +90,7 @@
                         {% for item in fs_rest %}
 
                         <tr>
-                            <td>{{item.book.title}}</th>
+                            <td>{{item}}</th>
                             <td>{{item.book.author}}</td>
                             <td><a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-outline-primary" type="button">View</button></a>  <a href="/books/sell/{{item.id}}/edit"><button class="btn btn-sm btn-outline-primary" type="button">Edit</button></a>  <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>

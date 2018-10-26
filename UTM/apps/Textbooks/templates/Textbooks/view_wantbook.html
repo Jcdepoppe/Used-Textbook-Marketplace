@@ -84,14 +84,12 @@
                 <img src="" alt="Placeholder for users picture">
             </div> -->
             <div class='information p-4 mb-2 bg-info text-white'>
-                <h4><span>Price: </span> {{info.display_price}} or less</h4>
-                <p><span>Condition: </span>  {{info.condition}} or better</p>
                 <p><span>Author: </span>  {{info.book.author}}</p>
                 <p><span>Publisher: </span>  {{info.book.publisher}}</p>
                 <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
-            <!--  <p><span>Sold by: </span>  {{info.seller.alias}}</p>
-                <p><span>Description: </span> {{info.description}}</p> -->
-                <a href="/books/want/{{info.book_id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.book_id}}/delete"><span style="color:black;">Delete</span></a>
+                <p><span>Willing to pay: </span> {{info.display_price}} or less</p>
+                <p><span>Will accept in condition: </span>  {{info.condition}} or better</p>
+                <a href="/books/want/{{info.id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.id}}/delete"><span style="color:black;">Delete</span></a>
             </div>
             
         </div>
@@ -99,11 +97,11 @@
         Matches Found ({{number_of_matches}})
         {% for item in sells_info %}
             <div class='information p-4 mb-2 bg-info text-white'>
-                <h4><span>Title : </span> {{item.book.title}}</h4>
+                <h4><span>Title : </span> {{item}}</h4>
                 <p><span>Sold By : </span>  
                 {{item.seller.name}}</p>
                 <p><span>Price : </span>  {{item.display_price}}</p>
-                <a href="/books/sell/{{info.book_id}}/show"><span style="color:black;">View</span></a>
+                <a href="/books/sell/{{item.id}}/show"><span style="color:black;">View</span></a>
             </div>
         {% endfor %}
         <!-- </div> -->

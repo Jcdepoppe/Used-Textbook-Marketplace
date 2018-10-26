@@ -53,18 +53,25 @@
     <div class="container">
         <div class="card bg-light">
             <div class="card-body">
-                <label for="txtBookSearch"><h5>Search for a book:</h5></label>
-                <input id="txtBookSearch" type="text">
-                <div id="divDescription"></div>
-
-                <h5 class="card-title">Add details of your sale</h5>
+                <h5>Find your book:</h5>
+                <div class="form-group row">
+                    <label for="txtBookSearch" class="col-sm-3 col-form-label">Search</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="txtBookSearch" type="text" placeholder="Author, title, keywords or ISBN">
+                    </div>
+                </div>
+                <div id="divDescription">
+                    <!-- *** Right here the selected book is displayed**** -->
+                </div>
+                <h5 class="card-title">Add the details of your sale</h5>
                 <form action="/books/sell/process" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-<!--*********************** This part will be autofilled by the API, if we get it to work! ***************  -->
-
-                    <div id='bookinfo'></div>
-
-<!-- ***************** From here on, it's all user specific data that will remain after the API magic **** -->
+                
+                    <div id='bookinfo'>
+                        <!-- hidden input types go here that are generated from the selected book -->
+                    </div>
+                
+                    <!-- *** The rest is information provided by the user **** -->
 
                     <div class="form-group row">
                         <label for="condition" class="col-sm-3 col-form-label">
@@ -93,14 +100,12 @@
                             Upload an image of your book
                         </div>
                         <div class="row col-sm-9 input-group">
-                            <div class="input-group">
                                 <label class="input-group-btn">
                                     <span class="btn btn-primary">
                                         Browse&hellip; <input type="file" style="display: none;" name="picture">
                                     </span>
                                 </label>
                                 <input type="text" class="form-control" readonly>
-                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -119,10 +124,10 @@
         </div>
 
     </div>
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </body>
 
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 {% load static %}
 <script src="{% static 'Textbooks/js/fileinput.js' %}"></script>
 <script type=text/javascript src="{% static 'Textbooks/js/scripts.js' %}"></script>
