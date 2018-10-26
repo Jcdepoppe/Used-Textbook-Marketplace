@@ -11,7 +11,7 @@ class Book(models.Model):
     publisher = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
     ISBN = models.CharField(max_length = 13, default="0")
-    cover = models.ImageField(blank=True, null=True, upload_to='covers/', verbose_name="")
+    cover = models.CharField(max_length=255, default="https://goo.gl/7vbrVt")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -22,8 +22,9 @@ class Sells(models.Model):
     book = models.ForeignKey(Book, related_name='for_sale')
     condition = models.SmallIntegerField()
     price = models.IntegerField(null=True)
-    picture = models.ImageField(blank=True, null=True, upload_to='user_pics/', verbose_name="", default="No-pic.png")
+    picture = models.ImageField(blank=True, null=True, upload_to='user_pics/', verbose_name="", default="/user_pics/No_pic.png")
     description = models.TextField(null=True)
+    sold = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -36,7 +37,10 @@ class Sells(models.Model):
         return dollars
         
     def __str__(self):
-        return (self.book, self.seller)
+        mod_title=self.book.title
+        if self.sold:
+            mod_title += " <span class='badge badge-warning'>SOLD</span>"
+        return mod_title
 
 class Wants(models.Model):
     buyer = models.ForeignKey(User, related_name='wants')

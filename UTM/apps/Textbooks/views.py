@@ -103,6 +103,7 @@ def sell_book_process(request):
 				author=request.POST['author'],
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
+				cover=request.POST['cover']
 			)
 		if 'picture' in request.FILES:
 			picture = request.FILES['picture']
@@ -120,10 +121,10 @@ def sell_book_process(request):
 
 
 def edit_sell(request, id):
-	data ={
-		'book': Sells.objects.get(id = id)
+	context ={
+		'sale': Sells.objects.get(id = id)
 	}
-	return render(request, 'Textbooks/edit_sell.html', data)
+	return render(request, 'Textbooks/edit_sell.html', context)
 
 def update_sell(request):
 	if 'id' not in request.session:
@@ -150,6 +151,7 @@ def update_sell(request):
 				author=request.POST['author'],
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
+				cover= request.POST['cover']
 			)
 		update.book = book
 		update.save()
@@ -169,16 +171,15 @@ def show_want(request, id):
 	if 'id' not in request.session:
 		return redirect('/')
 	request.session['sells_id'] = id
-	info = Wants.objects.get(id = id)
-	sells_info = Sells.objects.filter(book=info.book)
-	number_of_matches = Sells.objects.filter(book=info.book).count()
-	# if sells_info.price < info.price
-	data ={
-		'info': info,
-		'sells_info' : sells_info,
+	want = Wants.objects.get(id = id)
+	matches = Sells.objects.filter(book=want.book).filter(price__lte=want.price).filter(condition__gte=want.condition)
+	number_of_matches = matches.count()
+	context ={
+		'info': want,
+		'sells_info' : matches,
 		'number_of_matches' : number_of_matches
 	}
-	return render(request, 'Textbooks/view_wantbook.html', data)
+	return render(request, 'Textbooks/view_wantbook.html', context)
 
 
 def want_book(request):
@@ -244,10 +245,11 @@ def want_book_update(request):
 			publisher=request.POST['publisher'],
 			ISBN=request.POST['ISBN'],
 		)
+	
 	want.buyer = user
 	want.book = book
 	want.condition = request.POST['condition']
-	want.price = request.POST['price']
+	want.price = float(request.POST['price'])*100
 	want.save()
 	return redirect('/books')
 

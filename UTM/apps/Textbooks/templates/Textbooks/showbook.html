@@ -55,7 +55,7 @@
             margin-left: 40px;
         }
         .comment-btn{
-            width: 200px;
+            /* width: 200px; */
         }
     </style>
 </head>
@@ -74,10 +74,14 @@
         <div class='card bg-light'>
             <!-- All book information goes in this box -->
             <div class='main'>
-                <h2>{{info.book.title}}</h2>
+                <h2>{{info}}</h2>
                 <div class='pictures'>
-                    <img src="/media/No_pic.png" alt="Placeholder for cover picture">
+                    <img src="{{info.book.cover}}" alt="Placeholder for cover picture">
+                    {% if info.picture != "" %}
                     <img src="/media/{{info.picture}}" alt="picture of the seller's book">
+                    {% else %}
+                    <img src="/media/user_pics/No_pic.png" alt="picture of the seller's book">
+                    {% endif %}
                 </div>
                 <div class='information p-4 mb-2 bg-info text-white'>
                     <h4><span>Price: </span> {{info.display_price}}</h4>
@@ -124,8 +128,9 @@
                                 {% csrf_token %}
                                 <textarea name='comment'></textarea>
                                 <input type='hidden' value={{message.id}} name='message_id'>
-                                <button class="comment-btn btn btn-primary btn-block" type="submit">Post Comment</button>
+                                <button class="comment-btn col-2 btn btn-primary btn-block" type="submit">Post Comment</button>
                             </form>
+                            <button class=""
                             {%endif%}
                         </div>
                     </div>
