@@ -23,8 +23,9 @@ urlpatterns = [
 	url(r'^want/(?P<id>\d+)/delete$', views.delete_want),
 
 
-	# Can the wishlist and for sale messages/comments be used by the same route? #
-	url(r'^message$', views.message, name = 'message'),
+	
+	url(r'^sold$', views.sold, name='sold'),
+	url(r'^message$', views.message, name='message'),
 	url(r'^comment$', views.comment, name = 'comment'),
 	##############################################################################
 
