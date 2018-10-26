@@ -130,7 +130,7 @@ def update_sell(request):
 	if 'id' not in request.session:
 		return redirect('/')
 	if request.method =="POST":
-		update = Sells.objects.get(id = request.POST['book_id'])
+		update = Sells.objects.get(id = request.POST['sale_id'])
 		update.condition = request.POST['condition']
 		update.description = request.POST['description']
 		if 'picture' in request.FILES:
