@@ -46,6 +46,7 @@ def success(request):
 def editpage(request, id):
     user = User.objects.get(id=id)
     data = {
+        'id' : user.id,
         'name': user.name,
         'alias': user.alias,
         'email': user.email,
@@ -65,10 +66,27 @@ def edit(request):
         user.alias = request.POST['alias']
         user.email = request.POST['email']
         user.college = request.POST['college']
-        user.password = bcrypt.hashpw(request.POST['new_password'].encode(), bcrypt.gensalt())
         user.save()
         request.session['alias'] = user.alias
     return redirect('/books')
+
+
+def update_pswd_page(request,id):
+    return render(request, "log_reg/change_password.html", {  'user': User.objects.get(id=id) })
+
+
+def update_pswd(request,id):
+    if request.method =="POST":
+        errors = User.objects.changePassword(request.POST, request)
+        if len(errors):
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/log_reg/update_pswd_page')
+        user = User.objects.get(id = request.session['id'])
+        user.password = bcrypt.hashpw(request.POST['new_password'].encode(), bcrypt.gensalt())
+        user.save()
+        request.session['id'] = user.id
+    return redirect('/books')    
 
 
 def reset(request):

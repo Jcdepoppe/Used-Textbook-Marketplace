@@ -40,13 +40,18 @@ class UserManager(models.Manager):
             errors['alias'] = "Your alias name should be at least 3 characters"
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Email must be valid"
+       
+        return errors
+
+    def changePassword(self, postData, request):
+        errors = {}
+        user = User.objects.get(id=request.session['id'])
         if not bcrypt.checkpw(postData['old_password'].encode(), user.password.encode()):
             errors['old_password'] = "Old Password is incorrect"
         if len(postData['new_password']) < 1:
             errors['new_password'] = "Password cannot be blank"
         if postData['new_password'] != postData['confirm_password']:
             errors['confirm'] = "New Password and confirm password do not match"
-
         return errors
 
 

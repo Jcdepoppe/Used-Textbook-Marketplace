@@ -25,6 +25,7 @@ class Sells(models.Model):
     picture = models.ImageField(blank=True, null=True, upload_to='user_pics/', verbose_name="", default="/user_pics/No_pic.png")
     description = models.TextField(null=True)
     sold = models.BooleanField(default=False)
+    buyer_email = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
