@@ -74,10 +74,10 @@ def sell_book_process(request):
 		return redirect('/')
 	if request.method == "POST":
 		user=User.objects.get(id=request.session['id'])
+		#  We should search for ISBN number only (since it is unique to every book type and edition)
 		book_exists = Book.objects.filter(
 			title=request.POST['title'], 
 			author=request.POST['author'],
-			edition=int(request.POST['edition']),
 			publisher=request.POST['publisher'],
 			ISBN=request.POST['ISBN'],
 		)
@@ -87,7 +87,6 @@ def sell_book_process(request):
 			book=Book.objects.create(
 				title=request.POST['title'],
 				author=request.POST['author'],
-				edition=float(request.POST['edition']),
 				publisher=request.POST['publisher'],
 				ISBN=request.POST['ISBN'],
 			)

@@ -6,10 +6,8 @@ import calendar
 
 from apps.log_reg.models import User
 
-
 class Book(models.Model):
     title = models.CharField(max_length = 255)
-    edition = models.SmallIntegerField()
     publisher = models.CharField(max_length = 255)
     author = models.CharField(max_length = 255)
     ISBN = models.CharField(max_length = 13, default="0")
