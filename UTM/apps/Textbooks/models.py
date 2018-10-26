@@ -26,8 +26,15 @@ class Sells(models.Model):
     description = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def actual_price(self):
+        return self.price/100
+
     def display_price(self):
-        return self.price / 100
+        actual_price = self.price/100
+        dollars = '${:,.2f}'.format(actual_price)
+        return dollars
+        
     def __str__(self):
         return (self.book, self.seller)
 
@@ -39,8 +46,14 @@ class Wants(models.Model):
     distance = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def actual_price(self):
+        return self.price/100
+
     def display_price(self):
-        return self.price / 100
+        actual_price = self.price/100
+        dollars = '${:,.2f}'.format(actual_price)
+        return dollars
     # def __repr__(self):
     #     return "{}" .format(self.book)
 

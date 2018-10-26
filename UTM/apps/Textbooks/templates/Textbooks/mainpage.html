@@ -32,8 +32,9 @@
         .container {
             margin: auto;
             padding: 20px 0;
-            /*width: 70%;*/
-            /*background-image: url("/static/Textbooks/css/book1.jpg");*/
+            width: 90%;
+            /* background-image: url("/static/Textbooks/css/book1.jpg"); */
+
         }
         .left-panel { 
             display:inline-block;
@@ -66,7 +67,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h3>Books You Are Selling</h3>
+                <h3>My Books for Sale</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -85,7 +86,7 @@
                                 <a href="/books/sell/{{item.id}}/delete"><button class="btn btn-sm btn-outline-danger" type="button">Delete</button></a></td>
                         </tr>
                         {% endfor %}
-              
+
                         {% for item in fs_rest %}
 
                         <tr>
