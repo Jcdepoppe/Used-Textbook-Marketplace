@@ -25,13 +25,21 @@
     <title>UTM: Sell a book</title>
     <style>
         .navbar {
-            background-color: rgb(111, 182, 65)
+            background-color: rgb(122, 24, 24)
         }
 
         .container {
             margin: auto;
             padding: 20px 0;
             width: 70%;
+        }
+        .input-group>.form-control {
+            position: relative;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            width: 1%;
+            margin-right: -13px;
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -101,7 +109,7 @@
                         </div>
                         <div class="row col-sm-9 input-group">
                             <div class="input-group">
-                                <label class="input-group-btn">
+                                <label class="input-group-btn" style="margin-left:17px;">
                                     <span class="btn btn-primary">
                                         Browse&hellip; <input type="file" style="display: none;" name="picture">
                                     </span>

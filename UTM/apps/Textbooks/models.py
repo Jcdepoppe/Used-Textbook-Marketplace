@@ -43,6 +43,18 @@ class Sells(models.Model):
             mod_title += " <span class='badge badge-warning'>SOLD</span>"
         return mod_title
 
+    def displayCondition(self):
+        if self.condition == 5:
+            return "New"
+        elif self.condition == 4:
+            return "Used - Like New"
+        elif self.condition == 3:
+            return "Used - Very Good"
+        elif self.condition == 2:
+            return "Used - Good"
+        elif self.condition == 1:
+            return "Used - Acceptable"
+
 class Wants(models.Model):
     buyer = models.ForeignKey(User, related_name='wants')
     book = models.ForeignKey(Book, related_name='wanted')
