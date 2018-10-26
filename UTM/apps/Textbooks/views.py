@@ -260,3 +260,21 @@ def delete_want(request, id):
 	want = Wants.objects.get(id=id)
 	want.delete()
 	return redirect('/books')
+
+
+def sold(request):
+	if 'id' not in request.session:
+		return redirect('/')
+	if request.method == "POST":
+		user = User.objects.get(id=request.session['id'])
+		buyer = User.objects.get(id=request.POST['buyer_id'])
+		item = Sells.objects.get(id=request.POST['item_id'])
+		item.sold = True
+		item.buyer_email = buyer.email
+		item.save()
+		sold_comment = "SOLD to " + buyer.alias 
+		Comment.objects.create(content=sold_comment, on_message=Message.objects.get(
+			id=request.POST['message_id']))
+		# request.session['buyer_id']=request.POST['buyer_id']
+		return redirect('/books/sell/'+str(item.id)+'/show')
+	return redirect('/books')

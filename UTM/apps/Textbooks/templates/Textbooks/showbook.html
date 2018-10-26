@@ -94,6 +94,20 @@
                 </div>
             </div>
             <!-- All messages and comments in here -->
+            {% if request.session.id == info.seller.id%}
+                {% if info.sold %}
+                    <div class="card text-white bg-success mb-3 text-center" style="width: 100%;">
+                        <div class="card-body">
+                            <h4>
+                                You already decided to sell this book. Congratulations!
+                            </h4>
+                            <h4>
+                                Send an email to your buyer at {{info.buyer_email}}
+                            </h4>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
             <div class = 'comments'>
                 {%if request.session.id != info.seller.id%}
                 <div class='post_message'>
@@ -130,7 +144,13 @@
                                 <input type='hidden' value={{message.id}} name='message_id'>
                                 <button class="comment-btn col-2 btn btn-primary btn-block" type="submit">Post Comment</button>
                             </form>
-                            <button class=""
+                            <form action="/books/sold" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="buyer_id" value="{{message.posted_by.id}}">
+                                <input type="hidden" name="item_id" value="{{info.id}}">
+                                <input type="hidden" name="message_id" value="{{message.id}}">
+                                <button class="comment-btn col-2 btn btn-warning btn-block" type="submit">Sell it to this user</button>
+                            </form>
                             {%endif%}
                         </div>
                     </div>
