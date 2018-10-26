@@ -18,7 +18,7 @@
             outline: 1px dotted red;
         } */
         .navbar {
-            background-color: rgb(111, 182, 65)
+            background-color: rgb(122, 24, 24);
         }
         .container {
             margin: auto;
@@ -40,7 +40,6 @@
         img{
             max-width: 300px;
             max-height: 300px;
-            outline: 1px dotted black;
         }
         textarea{
             width: 400px;
@@ -76,16 +75,16 @@
             <div class='main'>
                 <h2>{{info}}</h2>
                 <div class='pictures'>
-                    <img src="{{info.book.cover}}" alt="Placeholder for cover picture">
+                    <img src="{{info.book.cover}}" alt="">
                     {% if info.picture != "" %}
-                    <img src="/media/{{info.picture}}" alt="picture of the seller's book">
+                    <img src="/media/{{info.picture}}" alt="">
                     {% else %}
-                    <img src="/media/user_pics/No_pic.png" alt="picture of the seller's book">
+                    <img src="/media/user_pics/No_pic.png" alt="">
                     {% endif %}
                 </div>
                 <div class='information p-4 mb-2 bg-info text-white'>
                     <h4><span>Price: </span> {{info.display_price}}</h4>
-                    <p><span>Condition: </span>  {{info.condition}}</p>
+                    <p><span>Condition: </span>  {{info.displayCondition}}</p>
                     <p><span>Author: </span>  {{info.book.author}}</p>
                     <p><span>Publisher: </span>  {{info.book.publisher}}</p>
                     <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
