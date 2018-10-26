@@ -14,14 +14,13 @@
 
     <title>Book View</title>
     <style>
-        /* *{
-            outline: 1px dotted red;
-        } */
+        *{
+            /* outline: 1px dotted red; */
+        }
         .navbar {
             background-color: rgb(122, 24, 24)
         }
         .container {
-            margin: auto;
             padding: 20px 0;
             width: 70%;
         }
@@ -30,7 +29,6 @@
         }
         .information, .pictures{
             display: inline-block;
-            width: 49%;
             padding: 10px;
             vertical-align: top;
         }
@@ -57,8 +55,10 @@
         .comment-btn{
             width: 200px;
         }
-        .main{
+        .main, .matches{
             display:inline-block;
+            width: 49.5%;
+            vertical-align: top;
         }
     </style>
 </head>
@@ -75,7 +75,8 @@
     </header>
 
 
-    <div class='container card bg-light'>
+    <div class='container card bg-light' style="display: inline-block; margin-left: 15%; text-align: center;">
+        
         <!-- All book information goes in this box -->
         <div class='main'>
             <h2>{{info.book.title}}</h2>
@@ -89,22 +90,23 @@
                 <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
                 <p><span>Willing to pay: </span> {{info.display_price}} or less</p>
                 <p><span>Will accept in condition: </span>  {{info.displayCondition}} or better</p>
-                <a href="/books/want/{{info.id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.id}}/delete"><span style="color:black;">Delete</span></a>
+                <a href="/books/want/{{info.id}}/edit"><button class="btn btn-sm btn-primary" type="button">Edit</button></a>  
+                <a href="/books/want/{{info.id}}/delete"><button class="btn btn-sm btn-danger" type="button">Delete</button></a>
             </div>
-            
         </div>
-        <p style="margin-left: 10px;"></p>
-        Matches Found ({{number_of_matches}})
-        {% for item in sells_info %}
-            <div class='information p-4 mb-2 bg-info text-white'>
-                <h4><span>Title : </span> {{item}}</h4>
-                <p><span>Sold By : </span>  
-                {{item.seller.name}}</p>
-                <p><span>Price : </span>  {{item.display_price}}</p>
-                <a href="/books/sell/{{item.id}}/show"><span style="color:black;">View</span></a>
-            </div>
-        {% endfor %}
-        <!-- </div> -->
+        <!-- <p style="margin-left: 10px;"></p> -->
+        <div class='matches'>
+            <h2>Matches Found ({{number_of_matches}})</h2>
+            {% for item in sells_info %}
+                <div class='information p-4 mb-2 bg-info text-white'>
+                    <h4><span>Title : </span> {{item}}</h4>
+                    <p><span>Sold By : </span>  
+                    {{item.seller.name}}</p>
+                    <p><span>Price : </span>  {{item.display_price}}</p>
+                    <a href="/books/sell/{{item.id}}/show"><button class="btn btn-sm btn-primary" type="button">View </button></a>
+                </div>
+            {% endfor %}
+        </div>
 
     </div>
 </body>
