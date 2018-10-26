@@ -43,25 +43,25 @@ def show_sell(request, id):
 	return render(request, 'Textbooks/showbook.html', data)
 
 
-def addNewbook(request):
-	if 'id' not in request.session:
-		return redirect('/')
-	response = "Add new book"
-	return HttpResponse(response)
+# def addNewbook(request):
+# 	if 'id' not in request.session:
+# 		return redirect('/')
+# 	response = "Add new book"
+# 	return HttpResponse(response)
 
 
-def editBookInfo(request, id):
-	if 'id' not in request.session:
-		return redirect('/')
-	response = "Edit book page"
-	return HttpResponse(response)
+# def editBookInfo(request, id):
+# 	if 'id' not in request.session:
+# 		return redirect('/')
+# 	response = "Edit book page"
+# 	return HttpResponse(response)
 
 
-def deleteBook(request, id):
-	if 'id' not in request.session:
-		return redirect('/')
-	response = "Delete book"
-	return HttpResponse(response)
+# def deleteBook(request, id):
+# 	if 'id' not in request.session:
+# 		return redirect('/')
+# 	response = "Delete book"
+# 	return HttpResponse(response)
 
 def message(request):
 	if 'id' not in request.session:
