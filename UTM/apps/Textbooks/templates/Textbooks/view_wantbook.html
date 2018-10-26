@@ -18,7 +18,7 @@
             outline: 1px dotted red;
         } */
         .navbar {
-            background-color: rgb(111, 182, 65)
+            background-color: rgb(122, 24, 24)
         }
         .container {
             margin: auto;
@@ -88,7 +88,7 @@
                 <p><span>Publisher: </span>  {{info.book.publisher}}</p>
                 <p><span>ISBN: </span>  {{info.book.ISBN}}</p>
                 <p><span>Willing to pay: </span> {{info.display_price}} or less</p>
-                <p><span>Will accept in condition: </span>  {{info.condition}} or better</p>
+                <p><span>Will accept in condition: </span>  {{info.displayCondition}} or better</p>
                 <a href="/books/want/{{info.id}}/edit"><span style="color:black;">Edit</span></a>  <a href="/books/want/{{info.id}}/delete"><span style="color:black;">Delete</span></a>
             </div>
             
